@@ -42,12 +42,31 @@ var TinyTestHelper = {
   renderStats: function(tests, failures){
     var numberOfTests = Object.keys(tests).length;
     var successes = numberOfTests - failures;
-    var summaryString = 'Ran ' + numberOfTests + ' tests: '
-                        + successes + ' successes, '
-                        + failures + ' failures';
+    // Call fixGrammar helper function to fix grammar issues
+    var numberOfTestsGrammar = TinyTestHelper.fixGrammar.test(numberOfTests);
+    var successesGrammar = TinyTestHelper.fixGrammar.success(successes);
+    var failuresGrammar = TinyTestHelper.fixGrammar.failure(failures);
+    var summaryString = 'Ran ' + numberOfTests + numberOfTestsGrammar
+                        + successes + successesGrammar
+                        + failures + failuresGrammar;
     var summaryElement = document.createElement('h1');
     summaryElement.textContent = summaryString;
     document.body.appendChild(summaryElement);
+  },
+
+  fixGrammar: {
+    success: function(successes){
+      var str = successes > 1 ? ' successes, ' : ' success, ';
+      return str;
+    },
+    failure: function(failures){
+      var str = failures > 1 ? ' failures' : ' failure';
+      return str;
+    },
+    test: function(numberOfTests){
+      var str = numberOfTests > 1 ? ' tests: ' : ' test: ';
+      return str;
+    }
   }
 };
 
