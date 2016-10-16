@@ -56,16 +56,13 @@ var TinyTestHelper = {
 
   fixGrammar: {
     success: function(successes){
-      var str = successes > 1 ? ' successes, ' : ' success, ';
-      return str;
+      return successes > 1 ? ' successes, ' : ' success, ';
     },
     failure: function(failures){
-      var str = failures > 1 ? ' failures' : ' failure';
-      return str;
+      return failures > 1 ? ' failures' : ' failure';
     },
     test: function(numberOfTests){
-      var str = numberOfTests > 1 ? ' tests: ' : ' test: ';
-      return str;
+      return numberOfTests > 1 ? ' tests: ' : ' test: ';
     }
   }
 };
